@@ -24,7 +24,8 @@ public class multiPerceptron {
 			e.printStackTrace();
 		}
 		
-		
+		//System.out.println(m.getLearningRate());
+		//System.out.println(m.getMomentum());
 	}
 	
 	public double getAccuracy() {

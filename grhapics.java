@@ -17,8 +17,11 @@ public class grhapics {
 	
 	public void generateChart(List<spMemo> data) {
 		XYChart.Series points1 = new XYChart.Series();
+		points1.setName("A");
 		XYChart.Series points2 = new XYChart.Series();
+		points2.setName("B");
 		XYChart.Series points3 = new XYChart.Series();
+		points3.setName("C");
 		
 		
 		

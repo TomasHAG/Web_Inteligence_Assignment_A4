@@ -40,44 +40,9 @@ public class Main extends Application {
 
         EventHandler<ActionEvent> handler1 = event -> {
         	try {
-        		final HBox hBoxl = new HBox();
-        		hBoxl.setSpacing(10);
-	    		int time = Integer.parseInt(TextFieldTime.getText());
-	    		load data = new load(TextFieldPath.getText());
-				grhapics gr = new grhapics();
-				
-				logistic lP = new logistic(data.getData(), time);
-				gr.generateChart(lP.createList());
-				int[][] cMatrix = lP.confusionMatrix();
-				 
-				Stage newWindow = new Stage();
-				 
-				hBoxl.getChildren().add(gr.getGhraph());
-				hBoxl.getChildren().add(new Label(time + " iterations\r"
-						 + "Accuracy = " + lP.getAccuracy() + " %\r"
-						 + "Confusion Matrix:\r"));
-				
-				GridPane gPane = new GridPane();
-				 for(int y = 0; y < 3; y++){
-		                for(int x = 0; x < 3; x++){
-		                	TextField tf = generateTextfeild(String.valueOf(cMatrix[x][y]), (((x == 0) ? "A" : ((x == 1) ? "B" : "C"))) + ", " + ((y == 0) ? "A" : ((y == 1) ? "B" : "C")));
-		                	gPane.setRowIndex(tf,y);
-		                	gPane.setColumnIndex(tf,x);    
-		                	gPane.getChildren().add(tf);
-		                }
-				 }
-				 
-				 hBoxl.getChildren().add(gPane);
-				 
-				 Scene scene  = new Scene(hBoxl, 1100, 700);
-				 
-				 
-	             newWindow.setTitle("Logistic");
-	             newWindow.setScene(scene);
-	             
-	             newWindow.show();
-				 
-	    	}catch(Exception e1) {
+        		int ite = Integer.parseInt(TextFieldTime.getText());
+        		newWindow1(TextFieldPath.getText(), ite);
+        	}catch(Exception e1) {
 	    		
 	        }
         };
@@ -85,44 +50,9 @@ public class Main extends Application {
         
         EventHandler<ActionEvent> handler2 = event -> {
         	try {
-	    		int time = Integer.parseInt(TextFieldTime.getText());
-	    		final HBox hBoxm = new HBox();
-	    		hBoxm.setSpacing(10);
-	    		load data = new load(TextFieldPath.getText());
-				grhapics gr = new grhapics();
-				
-				multiPerceptron mP = new multiPerceptron(data.getData(), time);
-				gr.generateChart(mP.createList());
-				int[][] cMatrix = mP.confusionMatrix();
-				 
-				 Stage newWindow = new Stage();
-				 
-				 hBoxm.getChildren().add(gr.getGhraph());
-				 hBoxm.getChildren().add(new Label(time + " time\r"
-						 + "Accuracy = " + mP.getAccuracy() + " %\r"
-						 + "Confusion Matrix:\r"));
-				 
-				 GridPane gPane = new GridPane();
-				 for(int y = 0; y < 3; y++){
-		                for(int x = 0; x < 3; x++){
-		                	TextField tf = generateTextfeild(String.valueOf(cMatrix[x][y]), (((x == 0) ? "A" : ((x == 1) ? "B" : "C"))) + ", " + ((y == 0) ? "A" : ((y == 1) ? "B" : "C")));
-		                	gPane.setRowIndex(tf,y);
-		                	gPane.setColumnIndex(tf,x);    
-		                	gPane.getChildren().add(tf);
-		                }
-				 }
-				 
-				 hBoxm.getChildren().add(gPane);
-
-				 
-				 Scene scene  = new Scene(hBoxm, 1100, 700);
-				 
-	             newWindow.setTitle("MultilayerPerceptron");
-	             newWindow.setScene(scene);
-	             
-	             newWindow.show();
-				 
-	    	}catch(Exception e1) {
+        		int time = Integer.parseInt(TextFieldTime.getText());
+        		newWindow2(TextFieldPath.getText(), time);
+        	}catch(Exception e1) {
 	    		
 	        }
         };
@@ -155,5 +85,91 @@ public class Main extends Application {
         tooltip.setText(tt);
         tf.setTooltip(tooltip);
         return tf;
+	}
+	
+	private void newWindow1(String path, int iterations) {
+		try {
+    		final HBox hBoxl = new HBox();
+    		hBoxl.setSpacing(10);
+    		load data = new load(path);
+			grhapics gr = new grhapics();
+			
+			logistic lP = new logistic(data.getData(), iterations);
+			gr.generateChart(lP.createList());
+			int[][] cMatrix = lP.confusionMatrix();
+			 
+			Stage newWindow = new Stage();
+			 
+			hBoxl.getChildren().add(gr.getGhraph());
+			hBoxl.getChildren().add(new Label(iterations + " iterations\r"
+					 + "Accuracy = " + lP.getAccuracy() + " %\r"
+					 + "Confusion Matrix:\r"));
+			
+			GridPane gPane = new GridPane();
+			 for(int y = 0; y < 3; y++){
+	                for(int x = 0; x < 3; x++){
+	                	TextField tf = generateTextfeild(String.valueOf(cMatrix[x][y]), (((x == 0) ? "A" : ((x == 1) ? "B" : "C"))) + ", " + ((y == 0) ? "A" : ((y == 1) ? "B" : "C")));
+	                	gPane.setRowIndex(tf,y);
+	                	gPane.setColumnIndex(tf,x);    
+	                	gPane.getChildren().add(tf);
+	                }
+			 }
+			 
+			 hBoxl.getChildren().add(gPane);
+			 
+			 Scene scene  = new Scene(hBoxl, 1100, 700);
+			 
+			 
+             newWindow.setTitle("Logistic");
+             newWindow.setScene(scene);
+             
+             newWindow.show();
+			 
+    	}catch(Exception e1) {
+    		
+        }
+	}
+	
+	private void newWindow2(String path, int time) {
+		try {
+    		final HBox hBoxm = new HBox();
+    		hBoxm.setSpacing(10);
+    		load data = new load(path);
+			grhapics gr = new grhapics();
+			
+			multiPerceptron mP = new multiPerceptron(data.getData(), time);
+			gr.generateChart(mP.createList());
+			int[][] cMatrix = mP.confusionMatrix();
+			 
+			 Stage newWindow = new Stage();
+			 
+			 hBoxm.getChildren().add(gr.getGhraph());
+			 hBoxm.getChildren().add(new Label(time + " time\r"
+					 + "Accuracy = " + mP.getAccuracy() + " %\r"
+					 + "Confusion Matrix:\r"));
+			 
+			 GridPane gPane = new GridPane();
+			 for(int y = 0; y < 3; y++){
+	                for(int x = 0; x < 3; x++){
+	                	TextField tf = generateTextfeild(String.valueOf(cMatrix[x][y]), (((x == 0) ? "A" : ((x == 1) ? "B" : "C"))) + ", " + ((y == 0) ? "A" : ((y == 1) ? "B" : "C")));
+	                	gPane.setRowIndex(tf,y);
+	                	gPane.setColumnIndex(tf,x);    
+	                	gPane.getChildren().add(tf);
+	                }
+			 }
+			 
+			 hBoxm.getChildren().add(gPane);
+
+			 
+			 Scene scene  = new Scene(hBoxm, 1100, 700);
+			 
+             newWindow.setTitle("MultilayerPerceptron");
+             newWindow.setScene(scene);
+             
+             newWindow.show();
+			 
+    	}catch(Exception e1) {
+    		
+        }
 	}
 }
